@@ -1,15 +1,6 @@
-# TODO: Dice Roll Parser...
-#       add and use cogs to separate commands and be able to load/unload them dynamically
-#       sync, reload... yadadyada
-
-import settings
 import discord
 from discord.ext import commands
-
-from pathlib import Path
-import os
-
-
+import config
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -17,10 +8,10 @@ intents.members = True
 
 class GenericBot(commands.Bot):
     def __init__(self):
-        super().__init__(command_prefix="!", intents=intents)
+        super().__init__(command_prefix = "!", intents = intents)
 
     async def setup_hook(self):
-        for cog in settings.COGS_DIR.glob("*.py"):
+        for cog in config.COGS_DIR.glob("*.py"):
             cog_name = cog.stem
             try:
                 await self.load_extension(f"cogs.{cog_name}")
@@ -33,13 +24,9 @@ class GenericBot(commands.Bot):
 
 bot = GenericBot()
 
-
-
 @bot.event
 async def on_ready():
     print(f'Logged in as {bot.user.name} (ID: {bot.user.id})')
-    await bot.change_presence(activity=discord.CustomActivity(name="/help"))
+    await bot.change_presence(activity = discord.CustomActivity(name = "/help"))
 
-
-
-bot.run(settings.DISCORD_TOKEN, log_handler=settings.handler, log_level=settings.logging.DEBUG)
+bot.run(config.DISCORD_TOKEN, log_handler = config.handler, log_level = config.logging.DEBUG)
