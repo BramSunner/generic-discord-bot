@@ -1,0 +1,6 @@
+Hello.
+This folder contains nothing.
+If you'd like to host this bot by yourself: then you'll be making your own sound bites!
+Just make sure they're .mp3 format (and normalize that audio so that the users do not get ear blasted).
+Thanks.
+- Me.
