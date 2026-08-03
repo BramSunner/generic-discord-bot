@@ -2,7 +2,8 @@
 .env
 
 # Sound Bites
-.mp3
+*.mp3
+*.wav
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
