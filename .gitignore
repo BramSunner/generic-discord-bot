@@ -1,6 +1,9 @@
 # Tokens
 .env
 
+# Sound Bites
+.mp3
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
