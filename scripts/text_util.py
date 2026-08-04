@@ -3,9 +3,10 @@ import discord
 import config
 
 
-def sanitize(input: str) -> str:
-    sanitized_input = input.replace()
-    return sanitized_input
+
+# def sanitize(input: str) -> str:
+#     sanitized_input = input.replace()
+#     return sanitized_input
 
 
 
@@ -92,7 +93,7 @@ async def msg_in_thread(ctx, thread_title: str, message_type: str, message) -> N
     # Light reminder to use the preferred channel for commands if the command was invoked in a different channel.
     if ctx.channel != channel:
         await ctx.message.delete()
-        await ctx.reply(f"Psst... use the preferred channel for commands next time!")
+        await ctx.reply(f"Psst... use the preferred channel for commands next time!", delete_after = 10)
 
 
 
