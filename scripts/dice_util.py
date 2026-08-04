@@ -25,18 +25,17 @@ def process_command(author: str, command: str) -> list:
 
         ---- Might add more but it'd be default like color and things.
     """
-    print(f"Command: {command} \n")
-
     valid, invalid = parse_command(command)
     roll_results = roll_dice(valid)
 
     # Send information to DATABASE.
-    # 
+    # later... too much now
 
     embeds = create_embeds(author, roll_results, invalid)
 
-    return embeds
+    pprint.pprint(embeds)
 
+    return embeds
 
 
 
@@ -320,7 +319,7 @@ def prepare_roll_fields(roll_results: dict, max_size = 1024, separator = ", ") -
             if current_length + sep_len + len(roll_str) > max_size:
                 current_field = separator.join(current_field)
                 fields.append({
-                    "name": current_title, # f"{len(rolls[last_index:index+1])}d{sides}{mod_str} | last_index{sum(rolls[last_index:index+1]) + mod * num}"
+                    "name": current_title, # f"{len(rolls[last_index:index+1])}d{sides}{mod_str}{' ' + adv if adv else ''} | last_index{sum(rolls[last_index:index+1]) + mod * num}"
                     "value": current_field
                 })
                 current_field = [roll_str]
@@ -328,7 +327,7 @@ def prepare_roll_fields(roll_results: dict, max_size = 1024, separator = ", ") -
                 last_index = index
 
             else:
-                current_title = f"{len(rolls[last_index:index+1])}d{sides}{mod_str} | {sum(rolls[last_index:index+1]) + mod * num}"
+                current_title = f"{len(rolls[last_index:index+1])}d{sides}{mod_str}{' ' + adv if adv else ''} | {sum(rolls[last_index:index+1]) + mod * num}"
                 current_field.append(roll_str)
                 current_length += len(roll_str)
 
@@ -345,14 +344,19 @@ def prepare_roll_fields(roll_results: dict, max_size = 1024, separator = ", ") -
 
 # Testing.
 if __name__ == "__main__":
-    author = 'tebbz'
+    class Author: 
+        def __init__(self, name):
+            self.name = name
+            self.mention = f"@{name}"
+
+    user = Author('tebbz')
     tests = [
         "d20+1 dd 4d8 --./rm rf 2d20 d0 10000d20000 D4 d20adv d6dis disadv d6++ 2d6dis",
         "2d20"
     ]
 
     for test in tests:
-        no_issue = process_command(author, test)
+        no_issue = process_command(user, test)
 
 
 

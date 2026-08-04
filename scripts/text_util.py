@@ -9,7 +9,7 @@ def sanitize(input: str) -> str:
 
 
 
-async def reply_in_channel(ctx, message_type: str, message) -> None:
+async def msg_in_channel(ctx, message_type: str, message) -> None:
     """
     Replies to a message in the preferred channel for the guild.
     If the preferred channel does not exist, it raises a ValueError.
@@ -50,7 +50,7 @@ async def reply_in_channel(ctx, message_type: str, message) -> None:
 
 
 
-async def reply_in_thread(ctx, thread_title: str, message_type: str, message) -> None:
+async def msg_in_thread(ctx, thread_title: str, message_type: str, message) -> None:
     """
     Replies to a message in a thread within the preferred channel for the guild.
     If the preferred channel does not exist, it raises a ValueError.

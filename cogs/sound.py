@@ -30,9 +30,6 @@ class SoundCog(commands.Cog, name="Sound Commands"):
 
     @app_commands.command(
             name = 'play',
-            description = 'Plays a specified sound in the voice channel.',
-            help = '!p (sound name) | Use !slist to see the list of sounds.',
-            aliases = ['p']
     )
     @app_commands.autocomplete(sound_name = play_autocomplete)
     async def play(self, ctx, sound_name: str = None):

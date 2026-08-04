@@ -26,8 +26,8 @@ class DiceCog(commands.Cog, name="Dice Commands"):
             ctx (commands.Context): The context of the command invocation.
             request (str): The dice roll request string.
         """
-        embeds = dice_util.process_command(ctx.author, request)
-        await text_util.reply_in_thread(ctx, "Roll Results", "m_embed", embeds) 
+        embeds = dice_util.process_command(ctx.author.mention, request)
+        await text_util.msg_in_thread(ctx, "Roll Results", "m_embed", embeds) 
 
 
 
