@@ -24,7 +24,7 @@ async def msg_in_channel(ctx, message_type: str, message) -> None:
         ValueError: If the preferred channel is not found or the file does not exist.
     """
     try:
-        channel = get_channel(ctx)
+        channel = await get_channel(ctx)
     except ValueError as e:
         await ctx.reply(f"Error: {e}. Please ask an admin to set a preferred channel first.", delete_after = 10)
         await ctx.message.delete()
@@ -67,7 +67,7 @@ async def msg_in_thread(ctx, thread_title: str, message_type: str, message) -> N
         ValueError: If the preferred channel is not found or the file does not exist.
     """
     try:
-        channel = get_channel(ctx)
+        channel = await get_channel(ctx)
     except ValueError as e:
         await ctx.reply(f"Error: {e}. Please ask an admin to set a preferred channel first.", delete_after = 10)
         await ctx.message.delete()

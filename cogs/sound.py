@@ -29,7 +29,8 @@ class SoundCog(commands.Cog, name = "Sound Commands"):
     @app_commands.autocomplete(sound_name = play_autocomplete)
     async def play(self, interaction: discord.Interaction, sound_name: str = None):
         # 1. Defer the interaction immediately to prevent 3-second timeout errors
-        await interaction.response.defer()
+        await interaction.response.defer(thinking = True)
+
         ctx = await commands.Context.from_interaction(interaction)
 
         if sound_name is None:
@@ -69,7 +70,10 @@ class SoundCog(commands.Cog, name = "Sound Commands"):
             except Exception as e:
                 print(f"Disconnect error: {e}")
 
-        # Play the sound.
+        # 5. Wait a moment for the voice client connection to stabilize.
+        await asyncio.sleep(1)
+
+        # 6. Play the sound.
         sound_path = f'{config.SOUNDS_DIR}/{sound_name}.mp3'
         try:
             voice_client.play(
