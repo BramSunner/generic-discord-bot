@@ -7,6 +7,8 @@ intents.message_content = True
 intents.members = True
 
 class GenericBot(commands.Bot):
+    preferred_channel = None # Initialize the preferred channel attribute
+
     def __init__(self):
         super().__init__(command_prefix = "!", intents = intents)
 
@@ -21,6 +23,17 @@ class GenericBot(commands.Bot):
 
         await self.tree.sync()
         print("Slash commands synced globally!")
+
+
+    def get_preferred_channel(self):
+        return self.preferred_channel
+
+    def set_preferred_channel(self, channel):
+        self.preferred_channel = channel
+
+
+
+
 
 bot = GenericBot()
 

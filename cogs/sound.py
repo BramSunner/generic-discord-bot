@@ -35,7 +35,7 @@ class SoundCog(commands.Cog, name = "Sound Commands"):
 
         if sound_name is None:
             # Note: You may need to update text_util to accept 'interaction' instead of 'ctx'
-            await text_util.msg_in_channel(ctx, "text", "Use /slist to see the list of available sounds.")
+            await interaction.followup.send("Use /slist to see the list of available sounds.", ephemeral = True)
             return
 
         sound_name = discord.utils.escape_mentions(sound_name)
@@ -45,7 +45,7 @@ class SoundCog(commands.Cog, name = "Sound Commands"):
         voice_channel = interaction.user.voice.channel if interaction.user.voice else None
 
         if voice_channel is None:
-            await text_util.msg_in_channel(ctx, "text", "You must be in a voice channel to use this command.")
+            await interaction.followup.send("You must be in a voice channel to use this command.", ephemeral = True)
             return
 
         # 3. Fix voice client fetching: Use interaction.guild.voice_client
@@ -80,9 +80,13 @@ class SoundCog(commands.Cog, name = "Sound Commands"):
                 discord.FFmpegPCMAudio(executable=config.FFMPEG_PATH, source=sound_path), 
                 after=disconnect_callback
             )
-            await text_util.msg_in_channel(ctx, "text", f"Now playing: {sound_name}")
+            await interaction.followup.send(f"Now playing: {sound_name}", ephemeral = True)
+            
         except Exception as e:
-            await text_util.msg_in_channel(ctx, "text", f"Error playing sound: {e}")
+            await interaction.followup.send(f"Error playing sound: {sound_name} because {e}", ephemeral = True)
+            pass
+
+        await interaction.followup.send(f"Now playing: {sound_name}", ephemeral = True)
 
 
 

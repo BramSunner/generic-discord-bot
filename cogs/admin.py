@@ -35,7 +35,7 @@ class AdminCog(commands.Cog, name = "Admin Commands"):
     async def load(self, ctx, cog_name: str):
         """Loads a cog."""
         try:
-            await self.bot.load_extension(f"{config.COGS_DIR}.{cog_name}")
+            await self.bot.load_extension(f"cogs.{cog_name}")
             await ctx.send(f"Cog loaded: {cog_name}")
         except Exception as e:
             await ctx.send(f"Failed to load cog {cog_name}: {e}")
@@ -50,7 +50,7 @@ class AdminCog(commands.Cog, name = "Admin Commands"):
     async def unload(self, ctx, cog_name: str):
         """Unloads a cog."""
         try:
-            await self.bot.unload_extension(f"{config.COGS_DIR}.{cog_name}")
+            await self.bot.unload_extension(f"cogs.{cog_name}")
             await ctx.send(f"Cog unloaded: {cog_name}")
         except Exception as e:
             await ctx.send(f"Failed to unload cog {cog_name}: {e}")
@@ -65,7 +65,7 @@ class AdminCog(commands.Cog, name = "Admin Commands"):
     async def reload(self, ctx, cog_name: str):
         """Reloads a cog."""
         try:
-            await self.bot.reload_extension(f"{config.COGS_DIR}.{cog_name}")
+            await self.bot.reload_extension(f"cogs.{cog_name}")
             await ctx.send(f"Cog reloaded: {cog_name}")
         except Exception as e:
             await ctx.send(f"Failed to reload cog {cog_name}: {e}")

@@ -1,0 +1,13 @@
+TODO:
+
+Make preferred channel on bot grab preferred_channel.txt (json) on startup
+default to none
+
+make that work with replies and stuff
+slash commands can just use ephemeral shit
+
+make every fookin command delete the invoke command
+
+integrate dice, stupid, util, make sure error_handler works etc
+
+video player? idk
